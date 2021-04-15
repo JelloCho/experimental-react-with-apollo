@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { APP_SECRET } = require('../utils');
 
 async function post(parent, args, context, info) {
-  const { userId } = context;
+  const { userId } = context; //Mutation requires authorization.
 
   const newLink = await context.prisma.link.create({
     data: {
