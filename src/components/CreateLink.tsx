@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import {useMutation} from "@apollo/client";
 import {CREATE_LINK_MUTATION} from "../utils/mutations";
 
+const initialState = {
+    description: '',
+    url: ''
+}
+
 const CreateLink = () => {
-    const [formState, setFormState] = useState({
-        description: '',
-        url: ''
-    });
+    const [formState, setFormState] = useState(initialState);
 
     const [createLink] = useMutation(CREATE_LINK_MUTATION, {
         variables: {

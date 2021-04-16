@@ -15,11 +15,12 @@ const LinkList = () => {
             {data && (
                 <>
                     {data.feed.links.map((link:LinkType) => (
-                        <Link key={link.id} link={link} />
+                        <Link key={link.id} {...link} />
                     ))}
                 </>
             )}
         </div>
     );
 };
+
 export default LinkList;

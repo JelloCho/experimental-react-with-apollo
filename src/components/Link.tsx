@@ -1,16 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {LinkType} from "../utils/types";
 
-type LinkProps = {
-    link:LinkType;
-}
-
-const Link = ({link}:LinkProps) => {
+const Link :FC<LinkType>= ({url,description}) => {
 
     return (
         <div>
             <div>
-                {link.description} ({link.url})
+                {description} ({url})
             </div>
         </div>
     );
