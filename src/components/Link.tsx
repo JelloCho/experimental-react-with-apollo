@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { Feed, LinkType } from '../utils/types';
+import { LinkType } from '../utils/types';
 import { AUTH_TOKEN } from '../constants';
 import { timeDifferenceForDate } from '../utils/util';
 import { useMutation } from '@apollo/client';
