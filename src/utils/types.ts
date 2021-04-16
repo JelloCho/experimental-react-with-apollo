@@ -1,3 +1,9 @@
+export type Feed = {
+    id: string
+    links: LinkType[]
+    count: number;
+}
+
 export type LinkType = {
     id: string;
     description: string;
