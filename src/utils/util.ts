@@ -1,4 +1,6 @@
-function timeDifference(current, previous) {
+import { LINKS_PER_PAGE } from './constants';
+
+function timeDifference(current: number, previous: number) {
   const milliSecondsPerMinute = 60 * 1000;
   const milliSecondsPerHour = milliSecondsPerMinute * 60;
   const milliSecondsPerDay = milliSecondsPerHour * 24;
@@ -38,8 +40,27 @@ function timeDifference(current, previous) {
   }
 }
 
-export function timeDifferenceForDate(date) {
+export function timeDifferenceForDate(date: string) {
   const now = new Date().getTime();
   const updated = new Date(date).getTime();
   return timeDifference(now, updated);
 }
+
+export const getQueryVariables = (
+  isNewPage?: boolean,
+  page?: number,
+) => {
+  let take, skip, orderBy;
+
+  if (isNewPage && page) {
+    skip = isNewPage ? (page - 1) * LINKS_PER_PAGE : 0;
+    take = isNewPage ? LINKS_PER_PAGE : 100;
+    orderBy = { createdAt: 'desc' };
+  } else {
+    skip = 0;
+    take = LINKS_PER_PAGE;
+    orderBy = { createdAt: 'desc' };
+  }
+
+  return { take, skip, orderBy };
+};

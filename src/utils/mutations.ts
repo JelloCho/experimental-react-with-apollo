@@ -1,62 +1,62 @@
-import {  gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const CREATE_LINK_MUTATION = gql`
-    mutation PostMutation(
-        $description: String!
-        $url: String!
-    ) {
-        post(description: $description, url: $url) {
-            id
-            createdAt
-            url
-            description
-        }
+  mutation PostMutation(
+    $description: String!
+    $url: String!
+  ) {
+    post(description: $description, url: $url) {
+      id
+      createdAt
+      url
+      description
     }
+  }
 `;
 
 export const SIGNUP_MUTATION = gql`
-    mutation SignupMutation(
-        $email: String!
-        $password: String!
-        $name: String!
+  mutation SignupMutation(
+    $email: String!
+    $password: String!
+    $name: String!
+  ) {
+    signup(
+      email: $email
+      password: $password
+      name: $name
     ) {
-        signup(
-            email: $email
-            password: $password
-            name: $name
-        ) {
-            token
-        }
+      token
     }
+  }
 `;
 
 export const LOGIN_MUTATION = gql`
-    mutation LoginMutation(
-        $email: String!
-        $password: String!
-    ) {
-        login(email: $email, password: $password) {
-            token
-        }
+  mutation LoginMutation(
+    $email: String!
+    $password: String!
+  ) {
+    login(email: $email, password: $password) {
+      token
     }
+  }
 `;
 
 export const VOTE_MUTATION = gql`
-    mutation VoteMutation($linkId: ID!) {
-        vote(linkId: $linkId) {
+  mutation VoteMutation($linkId: ID!) {
+    vote(linkId: $linkId) {
+      id
+      link {
+        id
+        votes {
+          id
+          user {
             id
-            link {
-                id
-                votes {
-                    id
-                    user {
-                        id
-                    }
-                }
-            }
-            user {
-                id
-            }
+          }
         }
+      }
+      user {
+        id
+      }
     }
+  }
 `;
