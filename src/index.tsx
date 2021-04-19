@@ -9,6 +9,7 @@ import {
   createHttpLink,
   InMemoryCache,
   split,
+  FieldFunctionOptions,
 } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
@@ -16,6 +17,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 import { AUTH_TOKEN } from './utils/constants';
 import { LinkType } from './utils/types';
+import { isUndefined } from 'lodash';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000',
@@ -70,6 +72,15 @@ const client = new ApolloClient({
       Feed: {
         fields: {
           links: {
+            read(existing, { variables }) {
+              if (isUndefined(variables)) return;
+              const { skip, take } = variables;
+
+              return (
+                existing &&
+                existing.slice(skip, skip + take)
+              );
+            },
             merge(existing = [], incoming: LinkType[]) {
               return [...existing, ...incoming];
             },

@@ -81,7 +81,7 @@ const LinkList = () => {
           {getLinksToRender(isNewPage, data.feed).map(
             (link: LinkType, index: number) => (
               <Link
-                key={link.id}
+                key={link.id + index}
                 {...link}
                 index={index + pageIndex}
               />
